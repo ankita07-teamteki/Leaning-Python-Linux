@@ -1,0 +1,23 @@
+services:
+  apache:
+    build:
+      context: ./apache
+      dockerfile: Dockerfile
+    container_name: learning-apache
+    ports:
+      - "8080:80"
+    volumes:
+      - ./apache/site:/usr/local/apache2/htdocs:rw
+
+  react-app:
+    build:
+      context: ./react-app
+      dockerfile: Dockerfile
+    container_name: learning-react
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./react-app:/app:rw
+      - /app/node_modules
+    stdin_open: true
+    tty: true
